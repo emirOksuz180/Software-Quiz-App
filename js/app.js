@@ -6,7 +6,8 @@ const questionlist = [
 ];
 
 
-const quiz = new Quiz(questionlist);  
+const quiz = new Quiz(questionlist);
+const ui = new UI();
 
 console.log(quiz);
 
@@ -14,7 +15,7 @@ document.getElementById("btnGetQuestion").addEventListener("click" , function() 
 
   if(quiz.questions.length != quiz.questionIndex) {
 
-    console.log(quiz.getQuestions());
+    ui.showQuestion(quiz.getQuestions());
     quiz.questionIndex += 1;
 
   } else {
