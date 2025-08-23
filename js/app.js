@@ -1,0 +1,1 @@
+console.log(questionlist[0].checkAnswer("d"));
