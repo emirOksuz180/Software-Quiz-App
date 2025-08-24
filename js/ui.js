@@ -5,7 +5,8 @@ function UI() {
   this.correctIcon = '<i class = "bi bi-check-circle">';
   this.inCorrectIcon = '<i class = "bi bi-x-circle">';
   this.btnNext = document.querySelector(".btn-next");
-
+  this.btnReplay = document.querySelector(".btn-replay");
+  this.btnQuit = document.querySelector(".btn-quit");
 
 }
 
@@ -55,5 +56,12 @@ UI.prototype.showQuestionCount = function(questionCount , totalQuestionCount) {
 
   const label = `<span class = "badge text-bg-danger">${questionCount} / ${totalQuestionCount} </span>`;
   document.querySelector(".question-index").innerHTML = label;
+
+}
+
+UI.prototype.showScore = function(trueAnswer , sumQuestion) {
+  
+  const label = `Total ${sumQuestion} question ${trueAnswer} right answer`;
+  document.querySelector(".score-text").innerHTML = label;
 
 }

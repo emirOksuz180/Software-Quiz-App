@@ -2,6 +2,7 @@ function Quiz(questions) {
   
   this.questionIndex = 0;
   this.questions = questions;
+  this.trueAnswerCount = 0;
 
 
 }

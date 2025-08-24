@@ -22,6 +22,7 @@ ui.btnNext.addEventListener("click" , function() {
   } else {
 
     console.log("quiz is done");
+    ui.showScore(quiz.trueAnswerCount , quiz.questions.length)
 
   }
   
@@ -44,8 +45,9 @@ function optionSelected(e) {
 
   if(question.checkAnswer(answer)) {
 
+    quiz.trueAnswerCount += 1;
     selectedElement.classList.add("correct");
-    e.target.insertAdjacentHTML("beforeend" , ui.correctIcon);
+    selectedElement.insertAdjacentHTML("beforeend" , ui.correctIcon);
 
   } else {
     selectedElement.classList.add("incorrect");
@@ -56,6 +58,27 @@ function optionSelected(e) {
   ui.disableAllOption();
 
 }
+
+ui.btnQuit.addEventListener("click" , function() {
+
+  window.location.reload();
+
+
+});
+
+
+ui.btnReplay.addEventListener("click" , function() {
+
+  quiz.questionIndex = 0;
+  quiz.trueAnswerCount = 0;
+
+  ui.btnNext.click();
+  ui.showScore(quiz.trueAnswerCount , quiz.questions.length);
+  
+
+
+
+});
 
 
 
