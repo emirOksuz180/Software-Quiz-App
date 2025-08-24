@@ -1,12 +1,17 @@
 function UI() {
 
-  this.quiz_box = document.querySelector("#quiz-box");
+  this.quizBox = document.querySelector("#quiz-box");
+  this.buttonBox = document.querySelector("#button-box");
+  this.scoreBox = document.querySelector("#score-box");
   this.body = document.querySelector("#quiz-box #body");
   this.correctIcon = '<i class = "bi bi-check-circle">';
   this.inCorrectIcon = '<i class = "bi bi-x-circle">';
+  this.btnStart = document.querySelector(".btn-start");
   this.btnNext = document.querySelector(".btn-next");
   this.btnReplay = document.querySelector(".btn-replay");
   this.btnQuit = document.querySelector(".btn-quit");
+  this.timeText = document.querySelector(".time-text");
+  this.timeSecond = document.querySelector(".time-second");
 
 }
 

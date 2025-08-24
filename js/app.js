@@ -9,19 +9,32 @@ const questionlist = [
 const quiz = new Quiz(questionlist);
 const ui = new UI();
 
+
+ui.btnStart.addEventListener("click" , function() {
+
+  startTimer(10);
+  ui.quizBox.classList.add("active");
+  ui.buttonBox.classList.remove("active");
+  ui.showQuestion(quiz.getQuestions());
+  ui.showQuestionCount(quiz.questionIndex + 1 , quiz.questions.length);
+  ui.btnNext.classList.remove("show");
+});
+
 console.log(quiz);
 
 ui.btnNext.addEventListener("click" , function() {
 
   if(quiz.questions.length != quiz.questionIndex) {
-
+    startTimer(10);
     ui.showQuestion(quiz.getQuestions());
     ui.showQuestionCount(quiz.questionIndex + 1 , quiz.questions.length);
+    ui.btnNext.classList.remove("show");
     
 
   } else {
 
-    console.log("quiz is done");
+    ui.scoreBox.classList.add("active");
+    ui.quizBox.classList.remove("active");
     ui.showScore(quiz.trueAnswerCount , quiz.questions.length)
 
   }
@@ -33,6 +46,7 @@ ui.btnNext.addEventListener("click" , function() {
 
 function optionSelected(e) {
 
+  clearInterval(counter);
   const answer = e.target.textContent[0];
   const question = quiz.getQuestions();
 
@@ -56,6 +70,7 @@ function optionSelected(e) {
 
   quiz.questionIndex += 1;
   ui.disableAllOption();
+  ui.btnNext.classList.add("show");
 
 }
 
@@ -72,13 +87,40 @@ ui.btnReplay.addEventListener("click" , function() {
   quiz.questionIndex = 0;
   quiz.trueAnswerCount = 0;
 
-  ui.btnNext.click();
-  ui.showScore(quiz.trueAnswerCount , quiz.questions.length);
-  
+  ui.btnStart.click();
+  ui.scoreBox.classList.remove("active"); 
+
 
 
 
 });
+
+let counter;
+
+function startTimer(time) {
+
+  counter = setInterval(timer , 1000);
+
+  function timer() {
+
+    ui.timeSecond.textContent = time;
+    time--;
+
+    if(time < 0) {
+
+      clearInterval(counter);
+      ui.timeText.textContent = "Time is up !";
+      ui.disableAllOption();
+      quiz.questionIndex += 1;
+
+      ui.btnNext.classList.add("show");
+     
+
+    }
+
+  }
+
+}
 
 
 
