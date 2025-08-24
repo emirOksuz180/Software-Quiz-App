@@ -13,6 +13,7 @@ const ui = new UI();
 ui.btnStart.addEventListener("click" , function() {
 
   startTimer(10);
+  startTimerLine();
   ui.quizBox.classList.add("active");
   ui.buttonBox.classList.remove("active");
   ui.showQuestion(quiz.getQuestions());
@@ -26,6 +27,7 @@ ui.btnNext.addEventListener("click" , function() {
 
   if(quiz.questions.length != quiz.questionIndex) {
     startTimer(10);
+    startTimerLine();
     ui.showQuestion(quiz.getQuestions());
     ui.showQuestionCount(quiz.questionIndex + 1 , quiz.questions.length);
     ui.btnNext.classList.remove("show");
@@ -47,6 +49,7 @@ ui.btnNext.addEventListener("click" , function() {
 function optionSelected(e) {
 
   clearInterval(counter);
+  clearInterval(counterLine);
   const answer = e.target.textContent[0];
   const question = quiz.getQuestions();
 
@@ -116,6 +119,29 @@ function startTimer(time) {
       ui.btnNext.classList.add("show");
      
 
+    }
+
+  }
+
+}
+
+let counterLine;  
+
+function startTimerLine() {
+
+  let line_width = 0;
+
+  counterLine = setInterval(timer , 20);
+
+
+  function timer() {
+
+    line_width += 1;
+
+    ui.timeLine.style.width = line_width + "px";
+
+    if(line_width > 549) {
+      clearInterval(counterLine);
     }
 
   }
