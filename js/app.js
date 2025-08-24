@@ -11,11 +11,12 @@ const ui = new UI();
 
 console.log(quiz);
 
-document.getElementById("btnGetQuestion").addEventListener("click" , function() {
+ui.btnNext.addEventListener("click" , function() {
 
   if(quiz.questions.length != quiz.questionIndex) {
 
     ui.showQuestion(quiz.getQuestions());
+    ui.showQuestionCount(quiz.questionIndex + 1 , quiz.questions.length);
     
 
   } else {
@@ -33,16 +34,22 @@ function optionSelected(e) {
 
   const answer = e.target.textContent[0];
   const question = quiz.getQuestions();
+
+
+  let selectedElement = e.target;
   
+  if(selectedElement.nodeName == "SPAN") {
+    selectedElement = selectedElement.parentElement;
+  }
 
   if(question.checkAnswer(answer)) {
 
-    e.target.classList.add("correct");
+    selectedElement.classList.add("correct");
     e.target.insertAdjacentHTML("beforeend" , ui.correctIcon);
 
   } else {
-    e.target.classList.add("incorrect");
-    e.target.insertAdjacentHTML("beforeend" , ui.inCorrectIcon);
+    selectedElement.classList.add("incorrect");
+    selectedElement.insertAdjacentHTML("beforeend" , ui.inCorrectIcon);
   }
 
   quiz.questionIndex += 1;

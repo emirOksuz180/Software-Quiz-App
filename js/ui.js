@@ -4,6 +4,7 @@ function UI() {
   this.body = document.querySelector("#quiz-box #body");
   this.correctIcon = '<i class = "bi bi-check-circle">';
   this.inCorrectIcon = '<i class = "bi bi-x-circle">';
+  this.btnNext = document.querySelector(".btn-next");
 
 
 }
@@ -48,4 +49,11 @@ UI.prototype.disableAllOption = function() {
   for(let option of options) {
     option.classList.add("disabled");
   }
+}
+
+UI.prototype.showQuestionCount = function(questionCount , totalQuestionCount) {
+
+  const label = `<span class = "badge text-bg-danger">${questionCount} / ${totalQuestionCount} </span>`;
+  document.querySelector(".question-index").innerHTML = label;
+
 }
